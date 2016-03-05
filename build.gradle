@@ -16,7 +16,7 @@ group = 'com.tealcubegames.gradle'
 version = scmVersion.version
 
 apply from: getGradleScriptsFile('src/main/resources/publish-java.gradle')
-apply from: getGradleScriptsFile('src/main/resources/publish-java.gradle')
+apply from: getGradleScriptsFile('src/main/resources/license-header.gradle')
 
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
