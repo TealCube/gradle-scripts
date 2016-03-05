@@ -12,11 +12,27 @@ scmVersion {
     releaseCommitMessage { version, position -> "release version: $version"}
 }
 
-group = 'com.tealcubegames.minecraft.spigot'
+group = 'com.tealcubegames.gradle'
 version = scmVersion.version
 
+apply from: getGradleScriptsFile('src/main/resources/publish-java.gradle')
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
 license {
-    header file('HEADER')
+    headerURI new URI(getGradleScriptsFile('HEADER'))
     ignoreFailures false
     strictCheck true
     ext {
@@ -28,4 +44,8 @@ license {
     mapping {
         gradle = 'SLASHSTAR_STYLE'
     }
+}
+
+def getGradleScriptsFile(String name) {
+    return "https://raw.githubusercontent.com/TealCube/gradle-scripts/master/$name"
 }
