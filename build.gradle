@@ -16,6 +16,7 @@ group = 'com.tealcubegames.gradle'
 version = scmVersion.version
 
 apply from: getGradleScriptsFile('src/main/resources/publish-java.gradle')
+apply from: getGradleScriptsFile('src/main/resources/publish-java.gradle')
 
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
@@ -29,21 +30,6 @@ task sourcesJar(type: Jar) {
 
 artifacts {
     archives javadocJar, sourcesJar
-}
-
-license {
-    headerURI new URI(getGradleScriptsFile('HEADER'))
-    ignoreFailures false
-    strictCheck true
-    ext {
-        name = project.name
-        year = Calendar.getInstance().get(Calendar.YEAR)
-        author = 'Teal Cube Games'
-        url = 'http://tealcubegames.com/'
-    }
-    mapping {
-        gradle = 'SLASHSTAR_STYLE'
-    }
 }
 
 def getGradleScriptsFile(String name) {
