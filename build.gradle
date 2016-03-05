@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'com.github.hierynomus.license' version '0.12.1'
+    id 'pl.allegro.tech.build.axion-release' version '1.3.4'
+}
+
+scmVersion {
+    tag {
+        prefix = project.name
+    }
+    createReleaseCommit true
+    releaseCommitMessage { version, position -> "release version: $version"}
+}
+
+group = 'com.tealcubegames.minecraft.spigot'
+version = scmVersion.version
+
+license {
+    header file('HEADER')
+    ignoreFailures false
+    strictCheck true
+    ext {
+        name = project.name
+        year = Calendar.getInstance().get(Calendar.YEAR)
+        author = 'Teal Cube Games'
+        url = 'http://tealcubegames.com/'
+    }
+    mapping {
+        gradle = 'SLASHSTAR_STYLE'
+    }
+}
