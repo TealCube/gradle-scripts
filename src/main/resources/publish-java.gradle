@@ -44,8 +44,8 @@ publishing {
             url getMavenPublishingRepo()
             name 'Teal Cube Repository'
             credentials {
-                username System.getenv('NEXUS_USERNAME') ?: nexusUsername
-                password System.getenv('NEXUS_PASSWORD') ?: nexusPassword
+                username System.getenv('NEXUS_USERNAME') ?: nexusUsername ?: ''
+                password System.getenv('NEXUS_PASSWORD') ?: nexusPassword ?: ''
             }
         }
     }
