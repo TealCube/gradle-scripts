@@ -1,0 +1,43 @@
+import java.time.LocalDateTime
+
+buildscript { repositories { jcenter() } }
+plugins {
+    id 'nebula.project' version '3.3.0'
+    id 'nebula.release' version '4.1.0'
+    id 'nebula.nebula-bintray' version '3.5.2'
+    id 'nebula.info' version '3.3.4'
+    id 'com.github.hierynomus.license' version '0.13.1'
+}
+
+group 'com.tealcubegames.gradle'
+version '0.0.1-SNAPSHOT'
+
+description = 'Common Gradle scripts for Teal Cube Games projects.'
+
+license {
+    header rootProject.file('HEADER')
+    ext.owner = 'Richard Harrah <topplethenunnery@gmail.com>'
+    ext.year = getYearString()
+    ext.name = project.name
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USERNAME') ?: bintrayUser
+    key = System.getenv('BINTRAY_API_KEY') ?: bintrayKey
+
+    pkg {
+        repo = 'tealcube-jars'
+        userOrg = 'tealcubegames'
+        websiteUrl = 'https://github.com/TealCube/${project.name}'
+        issueTrackerUrl = 'https://github.com/TealCube/${project.name}/issues'
+        vcsUrl = 'https://github.com/TealCube/${project.name}.git'
+        licenses = ['MIT']
+        labels = ['gradle', 'scripts', 'teal', 'cube', 'games']
+    }
+}
+
+static def getYearString() {
+    def inceptionYear = 2016
+    def curYear = LocalDateTime.now().getYear()
+    return curYear == inceptionYear ? "${curYear}" : "${inceptionYear} - ${curYear}"
+}
