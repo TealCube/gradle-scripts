@@ -36,6 +36,8 @@ bintray {
     }
 }
 
+release.dependsOn.remove('artifactoryPublish')
+
 static def getYearString() {
     def inceptionYear = 2016
     def curYear = LocalDateTime.now().getYear()
