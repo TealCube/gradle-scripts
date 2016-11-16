@@ -36,7 +36,11 @@ bintray {
     }
 }
 
-release.dependsOn.remove('artifactoryPublish')
+gradle.taskGraph.beforeTask { task ->
+    if (task.name == 'release') {
+        task.dependsOn.remove('artifactoryPublish')
+    }
+}
 
 static def getYearString() {
     def inceptionYear = 2016
